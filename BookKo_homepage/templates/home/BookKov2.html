@@ -1,0 +1,56 @@
+{% extends "home/layout.html"%}
+
+{%block BookKoh%}
+
+<header>
+    <a href="{% url 'home_page'%}" class="Logo" style="text-align: center;"><i class='bx bx-book-open'></i><span>BookKO</span></a>
+    <a href="#" class="browser" style="text-align: center;"><i class='bx bx-atom'></i></i><span>Browser</span></a>
+
+    <div class="search-c">
+        <form action="{%url 'search_book'%}" class="search" id="search-bar">
+            <input type="search" placeholder="Searching..." class="input-search">
+            <div class="search-button" id="search-b">
+                <i class='bx bx-search icon-search'></i>
+                <i class='bx bx-x icon-x'></i>
+            </div>
+        </form>
+    </div>
+    <div class="Log">
+        <a href="#" class="user">
+            <i class='bx bxs-user-circle'></i><span id="user-icon"> Sign in</span>
+        </a>
+        <a href="#" class="Registerbtn"><span id="user-icon">Register</span></a>
+    </div>
+</header>
+{%endblock%}
+
+
+{%block login%}
+<div class="login-form">
+    <h2>log in</h2>
+    <form action="#" method="post">
+        {% csrf_token %}
+        <div class="data">
+            <i class='bx bxs-user'></i>
+            <input type="text" name="user" id="user" placeholder="user name" required>
+        </div>
+        <div class="data">
+            <i class='bx bxs-lock'></i>
+            <input type="password" name="password" id="password" placeholder="password" required>
+        </div>
+        <div class="forget-remember">
+            <label><input type="checkbox">Remember me</label>
+            <a href="#">Forgot Password?</a>
+        </div>
+        <div class="login-btn">
+            <button type="submit" name="login">login</button>
+        </div>
+
+        <div class="register-signup">
+            <hr>
+            <p>Don't have account? </p><a href="#"> Sign up now</a>
+        </div>
+
+    </form>
+</div>
+{%endblock%}

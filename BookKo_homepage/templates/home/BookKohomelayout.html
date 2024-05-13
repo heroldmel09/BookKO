@@ -1,0 +1,220 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BookKO</title>
+    {%block style%}
+
+    {%endblock%}
+
+    <!--Icon logo from web source box Icon-->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&display=swap" rel="stylesheet">
+    <!--new slider-->
+    <!--light-slider.css------------->
+    <link rel="stylesheet" type="text/css" href="{%static 'Css/lightslider.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'Css/headercss1.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'Css/footer.css'%}">
+
+</head>
+
+<body>
+    <header>
+        {% if request.user.is_authenticated%}
+        <a href="{% url 'userlog_page'%}" class="Logo" style="text-align: center;"><i
+                class='bx bx-book-open'></i><span>BookKO</span></a>
+        <div class="browser"><a href="#" style="text-align: center;"><i
+                    class='bx bx-atom'></i></i><span>Browser</span></a>
+            <div class="dropdown">
+                <ul>
+                    {%for genre in Gsearh %}
+                    <li><a href="{%url 'genre_search' genre %}">{{genre}}</a></li>
+                    {%endfor%}
+                </ul>
+            </div>
+        </div>
+        {%else%}
+        <a href="{% url 'home_page'%}" class="Logo" style="text-align: center;"><i
+                class='bx bx-book-open'></i><span>BookKO</span></a>
+        <a href="#" class="browser" style="text-align: center;"><i class='bx bx-atom'></i></i><span>Browser</span></a>
+        {%endif%}
+
+        <div class="search-c">
+            <form action="{%url 'search_book'%}" class="search" id="search-bar">
+                {%csrf_token %}
+                <input type="search" placeholder="Searching..." class="input-search" name="booksearch"
+                    id="search-field">
+                <div class="search-button" id="search-b">
+                    <i class='bx bx-search icon-search'></i>
+                    <i class='bx bx-x icon-x'></i>
+                </div>
+            </form>
+        </div>
+
+        <div class="Log">
+            <a href="{%url 'cart'%}" class="cart">
+                <i class='bx bx-cart'></i>
+            </a>
+            <a href="{%url 'settings'%}" class="user">
+                <i class='bx bxs-user-circle'></i>
+            </a>
+        </div>
+    </header>
+    {%block home%}
+
+    {%endblock%}
+
+
+    <footer id="footer">
+        <div class="row">
+            <div class="col">
+                <h5>Company</h5>
+                <ul>
+                    <li>About Us</li>
+                    <li>Contact Us</li>
+                    <li>Vacancy</li>
+                    <li>Company</li>
+                </ul>
+            </div>
+            <div class="col">
+                <h5>Help</h5>
+                <ul>
+                    <li>Subscription Instructions</li>
+                    <li>Help Center</li>
+                    <li>Problem with the Site</li>
+                </ul>
+            </div>
+            <div class="col">
+                <h5>User</h5>
+                <ul>
+                    <li>Registration</li>
+                    <li>Basket</li>
+                    <li>Wish List</li>
+                </ul>
+            </div>
+            <div class="col">
+                <h5>Follow Us</h5>
+                <ul>
+                    <li>Instagram</li>
+                    <li>Facebookl</li>
+                    <li>Twitter</li>
+                </ul>
+            </div>
+            <div class="col">
+                <h5>Contact Us</h5>
+                <ul>
+                    <li><input class="form-control" type="email" name="
+                        " id="" placeholder="Enter email here"></li>
+                    <li><button class="btn btn-dark btn-md mt-2 " style="width: 100%;" type="submit">Send Email</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script type="text/javascript" src="{% static 'js/bookKOScript.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script type="text/javascript" src=" {% static 'js/jquery.hislide.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/lightslider.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/cart_js_todb.js'%}"></script>
+    <script type="text/javascript">
+        $(".Top-slide").hiSlide();
+        var user = '{{request.user}}'
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+        $(document).ready(function () {
+            $('#autoWidth').lightSlider({
+                autoWidth: true,
+                loop: true,
+                onSliderLoad: function () {
+                    $('#autoWidth').removeClass('cS-hidden');
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#autoWidth1').lightSlider({
+                autoWidth: true,
+                loop: true,
+                onSliderLoad: function () {
+                    $('#autoWidth1').removeClass('cS-hidden1');
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#autoWidth2').lightSlider({
+                autoWidth: true,
+                loop: true,
+                onSliderLoad: function () {
+                    $('#autoWidth2').removeClass('cS-hidden2');
+                }
+            });
+        });
+        const list = document.querySelectorAll('.tabs');
+        const tab = document.querySelectorAll('.profile-info');
+        function tabs(panelIndex) {
+            tab.forEach(function (node) {
+                node.style.display = "none";
+            })
+            tab[panelIndex].style.display = 'block';
+        }
+        tabs(0);
+
+        const photobtn = document.getElementById('photobtn')
+        const photoinput = document.getElementById('photoinput')
+        const submitbtn = document.getElementById('submitbtn')
+
+        photobtn.addEventListener("click", function () {
+            photoinput.click()
+        })
+
+        photoinput.addEventListener("change", function () {
+            if (photoinput.value) {
+                submitbtn.click()
+            }
+        })
+
+        const submitButton = document.querySelector('#submitbtn');
+        const inputFile = document.querySelector('#photoinput');
+
+        submitButton.addEventListener('click', () => {
+            const formData = new FormData();
+            formData.append('info_profile_pic', inputFile.files[0]);
+
+            fetch('/user-settings/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+        });       
+    </script>
+</body>
+
+</html>

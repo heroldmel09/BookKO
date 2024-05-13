@@ -1,0 +1,157 @@
+{% extends 'home/BookKohomelayout.html' %}
+{% load static %}
+{%block home %}
+<section>
+<div class="Top-Settings">
+    <div class="upper">
+        <img class="profile-pic"  src="{{user_info.profile_pic.url}}" />
+        <button class="edit" id="photobtn"><i class='bx bxs-camera'></i></button>
+        <form action="#" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+        <input type="file" class="edit info_profile_pic" name="info_profile_pic"  id="photoinput" hidden="hidden">
+        <button class="submit" id="submitbtn" hidden="hidden" name="update_photo"></i></button>
+         </form>
+        <div class="profile">
+            <h1>{{user_info.name.title}}</h1>
+            <div class="status">
+                member
+            </div>
+        </div>
+    </div>
+    <div class="lower">
+        <h3 id="header_low">My Account</h3>
+        <hr>
+        <div class="info-left">
+            <nav>
+                <a onclick="tabs(0)" class="tabs active" href="">
+                    <h2>Personal info</h2>
+                </a>
+                <a onclick="tabs(1)" class="tabs active">
+                    <h2>Payment info</h2>
+                </a>
+                <a onclick="tabs(2)" class="tabs active">
+                    <h2>Order History</h2>
+                </a>
+                <a onclick="tabs(3)" class="tabs active">
+                    <h2>Vouchers</h2>
+                </a>
+                <a onclick="tabs(4)" class="tabs active" href="{% url  'logout' %}">
+                        <h2>Log out</h2>
+                
+                </a>
+            </nav>
+        </div>
+        <div class="info-rigth">
+            <div class="profile-info">
+                <h1>Personal Info</h1>
+                <h2>User Name</h2>
+                <form action="#" method="post">
+                    {% csrf_token %}
+                    <input type="text" class="input2 username"  value="{{user_info.user}}" readonly="readonly">
+                    <h2>Full Name</h2>
+                    <input type="text" class="input2 info_name" name="info_name" id="info_name" value="{{user_info.name.title}}">
+                    <h2>Birthday</h2>
+                    <input type="text" class="input2 info_birth" name="info_birth" id="info_birth" value="{{user_info.birthday.title}}">
+                    <h2>Gender</h2>
+                    <input type="text" class="input2 info_gender" name="info_gender" id="info_gender" value="{{user_info.gender.title}}">
+                    <h2>Email</h2>
+                    <input type="text" class="input2 info_gmail" name="info_gmail" id="info_gmail"  value="{{user_info.email}}">
+                    <br>
+                    <button class="Button_p" name="info_update">Update</button>
+                </form>
+            </div>
+
+            <div class="profile-info">
+                <h1>Payment info</h1>
+                <h2>Payment Methold</h2>
+                <input type="text" class="input2" value="Herold Mel">
+                <h2>Billing Address</h2>
+                <input type="text" class="input2" value="Herold Mel">
+                <h2>ZipCode</h2>
+                <input type="text" class="input2" value="Herold Mel">
+                <br>
+                <button class="Button_p">Update</button>
+            </div>
+
+            <div class="profile-info">
+                <h1>Order History</h1>
+                <div class="orderH-con">
+                    <img class="orderH-num" src="nogame.jpg">
+                    <h6>date of purchased: 2023-03-24</h6>
+                    <div class="top-order">
+                        <h1>No game no life</h1>
+                        <h2>Author: Herold mel delsolor</h2>
+                        <h4>x1</h4>
+                        <h3>$9.20</h3>
+                    </div>
+                    <div class="total">
+                        <h1>order total: $9.20</h1>
+                    </div>
+                </div>
+
+                <div class="orderH-con">
+                    <img class="orderH-num" src="nogame.jpg">
+                    <h6>date of purchased: 2023-03-24</h6>
+                    <div class="top-order">
+                        <h1>No game no life</h1>
+                        <h2>Author: Herold mel delsolor</h2>
+                        <h4>x1</h4>
+                        <h3>$9.20</h3>
+                    </div>
+                    <div class="total">
+                        <h1>order total: $9.20</h1>
+                    </div>
+                </div>
+
+                <div class="orderH-con">
+                    <img class="orderH-num" src="nogame.jpg">
+                    <h6>date of purchased: 2023-03-24</h6>
+                    <div class="top-order">
+                        <h1>No game no life</h1>
+                        <h2>Author: Herold mel delsolor</h2>
+                        <h4>x1</h4>
+                        <h3>$9.20</h3>
+                    </div>
+                    <div class="total">
+                        <h1>order total: $9.20</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-info">
+                <h1>Vouchers</h1>
+                <div class="vourcher-con">
+                    <div class="percent">20%</div>
+                    <img class="dis-num" src="{% static 'Css/disc.png'%}">
+                    <div class="discount">discount</div>
+                    <Button class="use">use</Button>
+                </div>
+
+                <div class="vourcher-con">
+                    <div class="percent">20%</div>
+                    <img class="dis-num" src="{% static 'Css/disc.png'%}">
+                    <div class="discount">discount</div>
+                    <Button class="use">use</Button>
+                </div>
+
+                <div class="vourcher-con">
+                    <div class="percent">20%</div>
+                    <img class="dis-num" src="{% static 'Css/disc.png'%}">
+                    <div class="discount">discount</div>
+                    <Button class="use">use</Button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</section>
+
+
+
+{%endblock%}
+
+{%block style%}
+<link rel="stylesheet" type="text/css" href="{% static 'Css/User_settingscss.css'%}">
+{%endblock%}

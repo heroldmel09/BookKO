@@ -1,0 +1,86 @@
+{% extends 'home/BookKohomelayout.html' %}
+{% load static%}
+{%block home%}
+<div class="top-layer">
+    <img class="cover-img" src={{book_iD.image}}>
+    <div class="book-title">
+        <h1>{{book_iD.name}}</h1>
+        <h3>{{book_iD.author}}</h3>
+        <div class="Genre">
+            {{book_iD.genre}}
+        </div>
+    </div>
+</div>
+
+<div class="top-layer-left">
+    <img class="book-img" src={{book_iD.image}}>
+    <div class="stars">
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+    </div>
+    <div class="top-info">
+        <h3>1000 Review</h3>
+        <h3>100 Sold</h3>
+        <h3>{{book_iD.page}} Page</h3>
+        <h3>Publish: {{book_iD.publish}}</h3>
+    </div>
+
+    <div class="top-layer-right">
+        <div class="top-icon">
+            <button class="button-top">Buy {{book_iD.price}}$</button>
+            <button class="button-top1">Add to cart</button>
+            <a href="#" class="wish-list">
+                <i class='bx bxs-heart'></i></i>
+            </a>
+        </div>
+        <h3 class="desc-head">Synopsis</h3>
+        <div class="description">
+            <p>{{book_iD.description}}</p>
+        </div>
+
+    </div>
+
+</div>
+
+<h2 class="gtitle">{{genreid.genre}}</h2>
+<section class="slider">
+    <ul id="autoWidth1" class="cs-hidden">
+        {%for book in genreid%}
+        <li class="item-{{book.name}}">
+            <div class="body-item">
+                <div class="body-img">
+                    <img src={{book.image}} alt="1">
+                    <div class="overlay">
+                        <a href="{%url 'book_id' book.id  %}" class="buy-btn">View</a>
+                        <a data-product={{book.id}} data-action="add" class="buy-btn2 update_cart">Add To
+                            Cart</a>
+                        <a href="#" class="buy-btn">buy now</a>
+                    </div>
+                </div>
+                <div class="body-text">
+                    <h3>{{book.name}}</h3>
+                    <h5>{{book.author}}</h5>
+                    <p>{{book.publish}}</p>
+                </div>
+                <div class="stars">
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                </div>
+                <div class="body-price">{{book.price}}</div>
+            </div>
+        </li>
+        {%endfor%}
+    </ul>
+</section>
+
+{%endblock%}
+
+{%block style%}
+<link rel="stylesheet" type="text/css" href="{% static 'Css/Book_id.css'%}">
+{%endblock%}

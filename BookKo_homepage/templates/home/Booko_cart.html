@@ -1,0 +1,56 @@
+{% extends 'home/BookKohomelayout.html' %}
+{% load static%}
+{%block home%}
+<div class="top-cart cartpage">
+    <table>
+        <tr>
+            <th><input type="checkbox"></th>
+            <th>Product</th>
+            <th>Unit price</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+        </tr>
+        {% for items in items %}
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>
+                <div class="product-info-cart">
+                    <img class="img-cart" src={{items.Product.image}}>
+                    <div class="info-cart">
+                        <h1>{{items.Product.name}}</h1>
+                        <h2>{{items.Product.author}}</h2>
+                        <a href="#">remove</a>
+                    </div>
+            </td>
+            <td>{{items.Product.price}}$</td>
+            <td class="value-p"><input type="number" value={{items.quantity}}></td>
+            <td>{{items.get_total}}$</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="check-out">
+    <div class="vourcher-section">
+        <img src="{%static 'Css/disc.png'%}">
+        <div class="vourcher-design"></div>
+        <h3>Vouchers</h3>
+        <div class="vourcher-btn"><a href="#"><i class='bx bx-chevrons-right'></i></a></div>
+    </div>
+    <hr>
+    <div class="check-out-section">
+        <Label>
+            <input type="checkbox">ALL
+        </Label>
+        <div class="left-side-c">
+            <h2>Total: ${{order.get_product_total}}</h2>
+            <button>check out ( {{order.get_product_total_item}} item)</button>
+        </div>
+    </div>
+</div>
+
+{%endblock%}
+
+{%block style%}
+<link rel="stylesheet" type="text/css" href="{% static 'Css/cart.css'%}">
+{%endblock%}
